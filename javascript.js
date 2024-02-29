@@ -24,11 +24,8 @@ function divide(firstNum, secondNum) {
 // }
 
 function operate(equationStr) {
-
-    const equationArr = equationStr.split(" ");
-
-    // creating variables
-    let [fNum, sign, sNum] = equationArr;
+    // splitting string into vars
+    let [fNum, sign, sNum] = equationStr.split(" ");
 
     // TODO
     // switch for operators
