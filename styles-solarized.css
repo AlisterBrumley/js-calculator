@@ -35,7 +35,7 @@
     }
 }
 
-/* basic  */
+/* basic color scheme*/
 html {
     font-family: Verdana, Arial, sans-serif;
     background-color: var(--base3);
@@ -47,4 +47,26 @@ html {
         background-color: var(--base03);
         color: var(--base0);
     }
+}
+
+/* MAIN CSS DATA */
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 98vh;
+}
+
+/* .buffer {
+    flex: 1;
+    border: 2px red solid;
+} */
+
+.innerContainer {
+    background-color: var(--backgroundHL);
+    border-radius: 10px;
+    padding: 30px;
+    width: 300px;
+    height: 500px;
 }
