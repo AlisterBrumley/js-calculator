@@ -49,19 +49,14 @@ html {
     }
 }
 
-/* MAIN CSS DATA */
 
+/* MAIN CSS DATA */
 .mainContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 98vh;
 }
-
-/* .buffer {
-    flex: 1;
-    border: 2px red solid;
-} */
 
 .innerContainer {
     background-color: var(--backgroundHL);
@@ -70,3 +65,5 @@ html {
     width: 300px;
     height: 500px;
 }
+
+/* TODO; add 'screen', button and container flexboxes */
