@@ -64,6 +64,70 @@ html {
     padding: 30px;
     width: 300px;
     height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
-/* TODO; add 'screen', button and container flexboxes */
+.calcScreen {
+    background-color: var(--base3);
+    width: 270px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .calcScreen {
+        background-color: var(--textLL);
+        color: var(--background)
+    }
+}
+
+.calcEquation {
+    background-color: var(--base3);
+    width: 100%;
+    margin: 3px;
+    border: none;
+    font-family: 'JetBrains Mono', sans-serif;
+    text-align: right;
+    font-size: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .calcEquation {
+        background-color: var(--textLL);
+        color: var(--background);
+    }
+}
+
+.calcButtonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2px
+}
+
+.calcButtonRow {
+    display: flex;
+    gap: 2px
+}
+
+.calcButton {
+    background-color: var(--base3);
+    width: 67.5px;
+    height: 67.5px;
+    border: none;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-size: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .calcButton {
+        background-color: var(--textLL);
+        color: var(--background);
+    }
+}
