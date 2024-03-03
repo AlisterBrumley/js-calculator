@@ -48,3 +48,4 @@ function operate(equationStr) {
             break;
     }
 }
+

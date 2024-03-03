@@ -63,7 +63,7 @@ html {
     border-radius: 10px;
     padding: 30px;
     width: 300px;
-    height: 500px;
+    height: 460px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,7 +73,7 @@ html {
 .calcScreen {
     background-color: var(--base3);
     width: 270px;
-    height: 50px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,10 +91,11 @@ html {
     background-color: var(--base3);
     width: 100%;
     margin: 3px;
+    resize: none;
     border: none;
     font-family: 'JetBrains Mono', sans-serif;
     text-align: right;
-    font-size: 24px;
+    font-size: 36px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -117,8 +118,8 @@ html {
 
 .calcButton {
     background-color: var(--base3);
-    width: 67.5px;
-    height: 67.5px;
+    width: 66px;
+    height: 66px;
     border: none;
     border-radius: 3px;
     font-family: 'JetBrains Mono', sans-serif;
@@ -130,4 +131,14 @@ html {
         background-color: var(--textLL);
         color: var(--background);
     }
+}
+
+/* default font changes on browsers, this fixes */
+.buttonBS {
+    font-family: sans-serif;
+}
+
+::placeholder {
+    color: var(--textHL);
+    opacity: 0.3;
 }

@@ -16,28 +16,40 @@
     <div class="mainContainer">
         <div class="innerContainer">
             <div class="calcScreen">
-                <input class="calcEquation" type="text" placeholder="000000000000000000" disabled>
+                <input class="calcEquation" type="text" placeholder="000000000000" disabled>
+                <!-- <textarea class="calcEquation" rows="2" cols="1" placeholder="000000000000000000000000000000000000" disabled></textarea> -->
             </div>
             <div class="calcButtonContainer">
+                <div class="calcButtonRow">
+                    <button class="calcButton buttonAC">AC</button>
+                    <button class="calcButton buttonCE">CE</button>
+                    <button class="calcButton buttonBS">⌫</button>
+                    <button class="calcButton buttonDivide">÷</button>
+                </div>
                 <div class="calcButtonRow">
                     <button class="calcButton button7">7</button>
                     <button class="calcButton button8">8</button>
                     <button class="calcButton button9">9</button>
-                    <button class="calcButton button9">÷</button>
+                    <button class="calcButton buttonMultiply">x</button>
                 </div>
                 <div class="calcButtonRow">
                     <button class="calcButton button4">4</button>
                     <button class="calcButton button5">5</button>
                     <button class="calcButton button6">6</button>
-                    <button class="calcButton button9">*</button>
+                    <button class="calcButton buttonSubtract">-</button>
                 </div>
                 <div class="calcButtonRow">
                     <button class="calcButton button1">1</button>
                     <button class="calcButton button2">2</button>
                     <button class="calcButton button3">3</button>
-                    <button class="calcButton button9">+</button>
+                    <button class="calcButton buttonAdd">+</button>
                 </div>
-                <div class="calcButtonRow"><button class="calcButton button0">0</button></div>
+                <div class="calcButtonRow">
+                    <button class="calcButton button0">0</button>
+                    <button class="calcButton button00">00</button>
+                    <button class="calcButton buttonDot">.</button>
+                    <button class="calcButton buttonEquals">=</button>
+                </div>
             </div>
         </div>
     </div>
