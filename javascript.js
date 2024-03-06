@@ -1,3 +1,13 @@
+// initial vars
+const cEquation = document.querySelector(".calcEquation");
+const cNums = document.querySelectorAll(".buttonNum");
+const cClear = document.querySelector(".buttonCE");
+const cEqual = document.querySelector(".buttonEquals");
+const cBackspace = document.querySelector(".buttonBS");
+
+
+
+// operator functions
 function add(firstNum, secondNum) {
     return +firstNum + +secondNum;
 }
@@ -15,7 +25,7 @@ function divide(firstNum, secondNum) {
 }
 
 // // not sure if neccesary
-// function inputVal (equation) {
+// function inputValidation (equation) {
 //     // DOES NOT WORK - LONGER NUMBERS BREAK IT
 //     if (equation.length != 3) {
 //         console.log("equations must contain 3 characters, eg. a + b");
@@ -23,6 +33,7 @@ function divide(firstNum, secondNum) {
 //     }
 // }
 
+// main operator
 function operate(equationStr) {
     // splitting string into vars
     let [fNum, sign, sNum] = equationStr.split(" ");
@@ -57,15 +68,25 @@ function inputValues() {
     // 
 }
 
-const cButton = document.querySelectorAll(".calcButton");
-const cEquation = document.querySelector(".calcEquation")
+function clearScreen() {
+    cEquation.value = "";
+}
 
 
-// works, but needs to be _only_ numbers
-// change number button classes to limit
-// put in function?
-cButton.forEach((cKey) => {
-    cKey.addEventListener("click", () => {
-        cEquation.value = cEquation.value + cKey.textContent;
+cNums.forEach((cNum) => {
+    cNum.addEventListener("click", () => {
+        cEquation.value = cEquation.value + cNum.textContent;
     });
+});
+
+cClear.addEventListener("click", () => {
+    clearScreen();
+});
+
+cBackspace.addEventListener("click", () => {
+    cEquation.value = cEquation.value.slice(0, -1)
 })
+
+cEqual.addEventListener("click", () => {
+    alert(cEquation.value);
+});
