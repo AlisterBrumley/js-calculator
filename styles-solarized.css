@@ -71,7 +71,7 @@ html {
 }
 
 .calcScreen {
-    background-color: var(--base3);
+    background-color: var(--background);
     width: 270px;
     height: 75px;
     display: flex;
@@ -88,7 +88,8 @@ html {
 }
 
 .calcEquation {
-    background-color: var(--base3);
+    background-color: var(--background);
+    color: var(--text);
     width: 100%;
     margin: 3px;
     resize: none;
@@ -108,7 +109,8 @@ html {
 .calcButtonContainer {
     display: flex;
     flex-direction: column;
-    gap: 2px
+    gap: 2px;
+
 }
 
 .calcButtonRow {
@@ -118,6 +120,7 @@ html {
 
 .calcButton {
     background-color: var(--base3);
+    color: var(--text);
     width: 66px;
     height: 66px;
     border: none;
@@ -140,5 +143,5 @@ html {
 
 ::placeholder {
     color: var(--textHL);
-    opacity: 0.3;
+    opacity: 0.1;
 }

@@ -29,7 +29,7 @@ function operate(equationStr) {
 
     // TODO
     // switch for operators
-    switch(sign) {
+    switch (sign) {
         case "+":
             console.log("works +");
             console.log(add(fNum, sNum));
@@ -49,3 +49,23 @@ function operate(equationStr) {
     }
 }
 
+function inputValues() {
+    //  TODO
+    // i think switch statment, taking the value of button 
+    // and then input to screen?
+    //  if equals, run new function
+    // 
+}
+
+const cButton = document.querySelectorAll(".calcButton");
+const cEquation = document.querySelector(".calcEquation")
+
+
+// works, but needs to be _only_ numbers
+// change number button classes to limit
+// put in function?
+cButton.forEach((cKey) => {
+    cKey.addEventListener("click", () => {
+        cEquation.value = cEquation.value + cKey.textContent;
+    });
+})
