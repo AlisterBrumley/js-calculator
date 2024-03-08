@@ -1,10 +1,21 @@
 // initial vars
-const cEquation = document.querySelector(".calcEquation");
+const cScreen = document.querySelector(".calcScreen");
 const cNums = document.querySelectorAll(".buttonNum");
+const cOperators = document.querySelectorAll(".buttonOperator")
+const cDecimal = document.querySelector(".buttonDecimal")
+const cAllClear = document.querySelector(".buttonAC")
 const cClear = document.querySelector(".buttonCE");
 const cEqual = document.querySelector(".buttonEquals");
 const cBackspace = document.querySelector(".buttonBS");
 
+// constructor
+class Equation {
+    constructor(firstTerm, operator, secondTerm) {
+        this.firstTerm = firstTerm;
+        this.operator = operator;
+        this.secondTerm = secondTerm;
+    }
+}
 
 
 // operator functions
@@ -24,23 +35,15 @@ function divide(firstNum, secondNum) {
     return firstNum / secondNum;
 }
 
-// // not sure if neccesary
-// function inputValidation (equation) {
-//     // DOES NOT WORK - LONGER NUMBERS BREAK IT
-//     if (equation.length != 3) {
-//         console.log("equations must contain 3 characters, eg. a + b");
-//         return false;
-//     }
-// }
 
 // main operator
 function operate(equationStr) {
     // splitting string into vars
-    let [fNum, sign, sNum] = equationStr.split(" ");
+    // let [fNum, operator, sNum] = equationStr.split(" ");
 
     // TODO
     // switch for operators
-    switch (sign) {
+    switch (operator) {
         case "+":
             console.log("works +");
             console.log(add(fNum, sNum));
@@ -60,33 +63,107 @@ function operate(equationStr) {
     }
 }
 
-function inputValues() {
-    //  TODO
-    // i think switch statment, taking the value of button 
-    // and then input to screen?
-    //  if equals, run new function
-    // 
+
+
+
+
+
+
+// inputting values to equation
+// inputs operator
+function inputOperator(operator) {
+    if (!cEquation.firstTerm) {
+        cEquation.firstTerm = "0";
+    }
+    cEquation.operator = operator
 }
 
-function clearScreen() {
-    cEquation.value = "";
+// inputs numbers to terms and displays on screen
+function inputToTerm(number) {
+    if (operatorCheck()) {
+        cEquation.firstTerm = inputNum(number, cEquation.firstTerm);
+    } else {
+        cEquation.secondTerm = inputNum(number, cEquation.secondTerm);
+    }
 }
 
+// returns true if there is no operator set
+function operatorCheck() {
+    return !cEquation.operator;
+}
+
+// returns true if no decimals present
+function decimalCheck(currentTerm) {
+    return !currentTerm.includes(".")
+
+}
+
+
+function inputNum(newNumber, currentTerm) {
+    return currentTerm = cScreen.value = [currentTerm, newNumber].join("")
+}
+
+function inputDecimal() {
+    if (operatorCheck()) {
+        if (decimalCheck(cEquation.firstTerm)) {
+            cEquation.firstTerm = inputNum(".", cEquation.firstTerm);
+        }
+    } else {
+        if (decimalCheck(cEquation.secondTerm)) {
+            cEquation.secondTerm = inputNum(".", cEquation.secondTerm);
+        }
+    }
+}
+
+
+
+
+
+
+
+// PROTOTYPE - NEEDS TO CLEAR CURRENT VALUE
+// clearing screen/equation
+function clearEntry() {
+    cEquation.firstTerm = null;
+    cScreen.value = null;
+    // todo - clear current value in equation object
+}
+
+// clearing all, effective reset
+function allClear() {
+    cScreen.value = null;
+    return new Equation
+}
+
+
+
+
+
+
+
+
+// MAIN
+let cEquation = allClear()
 
 cNums.forEach((cNum) => {
-    cNum.addEventListener("click", () => {
-        cEquation.value = cEquation.value + cNum.textContent;
-    });
+    cNum.addEventListener("click", () => inputToTerm(cNum.textContent));
 });
 
-cClear.addEventListener("click", () => {
-    clearScreen();
-});
+cDecimal.addEventListener("click", () => inputDecimal())
+
+cOperators.forEach((cOp) => {
+    cOp.addEventListener("click", () => inputOperator(cOp.textContent))
+})
+
+cAllClear.addEventListener("click", () => cEquation = allClear());
+
+// DISBALED - TO FIX
+// cClear.addEventListener("click", () => clearEntry());
 
 cBackspace.addEventListener("click", () => {
-    cEquation.value = cEquation.value.slice(0, -1)
+    cScreen.value = cScreen.value.slice(0, -1)
 })
 
 cEqual.addEventListener("click", () => {
-    alert(cEquation.value);
+    alert(cScreen.value);
 });

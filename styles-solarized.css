@@ -70,7 +70,7 @@ html {
     justify-content: space-around;
 }
 
-.calcScreen {
+.calcScreenContainer {
     background-color: var(--background);
     width: 270px;
     height: 75px;
@@ -81,13 +81,13 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
-    .calcScreen {
+    .calcScreenContainer {
         background-color: var(--textLL);
         color: var(--background)
     }
 }
 
-.calcEquation {
+.calcScreen {
     background-color: var(--background);
     color: var(--text);
     width: 100%;
@@ -100,10 +100,15 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
-    .calcEquation {
+    .calcScreen {
         background-color: var(--textLL);
         color: var(--background);
     }
+}
+
+::placeholder {
+    color: var(--textHL);
+    opacity: 0.1;
 }
 
 .calcButtonContainer {
@@ -139,9 +144,4 @@ html {
 /* default font changes on browsers, this fixes */
 .buttonBS {
     font-family: sans-serif;
-}
-
-::placeholder {
-    color: var(--textHL);
-    opacity: 0.1;
 }
