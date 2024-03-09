@@ -37,7 +37,7 @@ function divide(firstNum, secondNum) {
 
 
 // main operator
-function operate(equationStr) {
+function operate(equation) {
     // splitting string into vars
     // let [fNum, operator, sNum] = equationStr.split(" ");
 
@@ -61,12 +61,9 @@ function operate(equationStr) {
             console.log(divide(fNum, sNum));
             break;
     }
+
+    // think
 }
-
-
-
-
-
 
 
 // inputting values to equation
@@ -98,11 +95,12 @@ function decimalCheck(currentTerm) {
 
 }
 
-
+// inputs numbers to term CHANGE NAME WITH inputToTerm!
 function inputNum(newNumber, currentTerm) {
     return currentTerm = cScreen.value = [currentTerm, newNumber].join("")
 }
 
+// inputs decimals - uses inputNum
 function inputDecimal() {
     if (operatorCheck()) {
         if (decimalCheck(cEquation.firstTerm)) {
@@ -116,16 +114,14 @@ function inputDecimal() {
 }
 
 
-
-
-
-
-
 // PROTOTYPE - NEEDS TO CLEAR CURRENT VALUE
 // clearing screen/equation
 function clearEntry() {
-    cEquation.firstTerm = null;
-    cScreen.value = null;
+    if (operatorCheck){
+        cScreen.value = cEquation.firstTerm = null;
+    } else {
+        cScreen.value = cEquation.secondTerm = null;
+    }
     // todo - clear current value in equation object
 }
 
@@ -134,12 +130,6 @@ function allClear() {
     cScreen.value = null;
     return new Equation
 }
-
-
-
-
-
-
 
 
 // MAIN
@@ -157,13 +147,12 @@ cOperators.forEach((cOp) => {
 
 cAllClear.addEventListener("click", () => cEquation = allClear());
 
-// DISBALED - TO FIX
-// cClear.addEventListener("click", () => clearEntry());
+cClear.addEventListener("click", () => clearEntry());
 
 cBackspace.addEventListener("click", () => {
     cScreen.value = cScreen.value.slice(0, -1)
 })
 
-cEqual.addEventListener("click", () => {
-    alert(cScreen.value);
-});
+// cEqual.addEventListener("click", () => {
+//     operate(cEquation)
+// });
