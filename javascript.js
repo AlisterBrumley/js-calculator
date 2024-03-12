@@ -62,7 +62,10 @@ function operate(equation) {
             break;
     }
 
-    // think
+    // think need to run 
+    // inputToTerm(add(equation.f, equation.s), new Equation)
+    // but might have to create new equation ahead of time?
+    // make sure not to overwrite existing
 }
 
 
@@ -72,71 +75,80 @@ function inputOperator(operator) {
     if (!cEquation.firstTerm) {
         cEquation.firstTerm = "0";
     }
-    cEquation.operator = operator
+    cEquation.operator = operator;
 }
 
 // inputs numbers to terms and displays on screen
-function inputToTerm(number) {
-    if (operatorCheck()) {
-        cEquation.firstTerm = inputNum(number, cEquation.firstTerm);
+function inputNumerical(number) {
+    if (operatorNotPresent()) {
+        cEquation.firstTerm = inputToTerm(number, cEquation.firstTerm);
     } else {
-        cEquation.secondTerm = inputNum(number, cEquation.secondTerm);
+        cEquation.secondTerm = inputToTerm(number, cEquation.secondTerm);
     }
 }
 
+// inputs decimals - uses inputToTerm
+function inputDecimal() {
+    if (operatorNotPresent()) {
+        if (decimalNotPresent(cEquation.firstTerm)) {
+            cEquation.firstTerm = inputToTerm(".", cEquation.firstTerm);
+        }
+    } else {
+        if (decimalNotPresent(cEquation.secondTerm)) {
+            cEquation.secondTerm = inputToTerm(".", cEquation.secondTerm);
+        }
+    }
+}
+
+// inputs values to term
+function inputToTerm(newNumber, currentTerm) {
+    return currentTerm = cScreen.value = [currentTerm, newNumber].join("")
+}
+
 // returns true if there is no operator set
-function operatorCheck() {
+function operatorNotPresent() {
     return !cEquation.operator;
 }
 
-// returns true if no decimals present
-function decimalCheck(currentTerm) {
+// returns true if no decimals already present in number term
+function decimalNotPresent(currentTerm) {
     return !currentTerm.includes(".")
 
 }
 
-// inputs numbers to term CHANGE NAME WITH inputToTerm!
-function inputNum(newNumber, currentTerm) {
-    return currentTerm = cScreen.value = [currentTerm, newNumber].join("")
-}
-
-// inputs decimals - uses inputNum
-function inputDecimal() {
-    if (operatorCheck()) {
-        if (decimalCheck(cEquation.firstTerm)) {
-            cEquation.firstTerm = inputNum(".", cEquation.firstTerm);
-        }
-    } else {
-        if (decimalCheck(cEquation.secondTerm)) {
-            cEquation.secondTerm = inputNum(".", cEquation.secondTerm);
-        }
-    }
-}
-
-
-// PROTOTYPE - NEEDS TO CLEAR CURRENT VALUE
-// clearing screen/equation
-function clearEntry() {
-    if (operatorCheck){
-        cScreen.value = cEquation.firstTerm = null;
-    } else {
-        cScreen.value = cEquation.secondTerm = null;
-    }
-    // todo - clear current value in equation object
-}
-
+// CLEARING FUNCTIONS
 // clearing all, effective reset
 function allClear() {
     cScreen.value = null;
     return new Equation
 }
 
+// clearing current term
+function clearEntry() {
+    if (operatorNotPresent()){
+        cScreen.value = cEquation.firstTerm = null;
+    } else {
+        cScreen.value = cEquation.secondTerm = null;
+    }
+}
+
+// backspace last number entered
+function backSpace() {
+    if (operatorNotPresent()) {
+        cScreen.value = cEquation.firstTerm = cEquation.firstTerm.slice(0, -1);
+    } else {
+        cScreen.value = cEquation.secondTerm = cEquation.secondTerm.slice(0, -1);
+    }
+}
+
 
 // MAIN
 let cEquation = allClear()
 
+
+// EVENT LISTENERS
 cNums.forEach((cNum) => {
-    cNum.addEventListener("click", () => inputToTerm(cNum.textContent));
+    cNum.addEventListener("click", () => inputNumerical(cNum.textContent));
 });
 
 cDecimal.addEventListener("click", () => inputDecimal())
@@ -149,9 +161,7 @@ cAllClear.addEventListener("click", () => cEquation = allClear());
 
 cClear.addEventListener("click", () => clearEntry());
 
-cBackspace.addEventListener("click", () => {
-    cScreen.value = cScreen.value.slice(0, -1)
-})
+cBackspace.addEventListener("click", () => backSpace())
 
 // cEqual.addEventListener("click", () => {
 //     operate(cEquation)
