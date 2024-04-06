@@ -38,17 +38,9 @@
 /* basic color scheme*/
 html {
     font-family: Verdana, Arial, sans-serif;
-    background-color: var(--base3);
-    color: var(--base00);
+    background-color: var(--background);
+    color: var(--text);
 }
-
-@media (prefers-color-scheme: dark) {
-    html {
-        background-color: var(--base03);
-        color: var(--base0);
-    }
-}
-
 
 /* MAIN CSS DATA */
 .mainContainer {
@@ -80,13 +72,6 @@ html {
     border-radius: 3px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .calcScreenContainer {
-        background-color: var(--textLL);
-        color: var(--background)
-    }
-}
-
 .calcScreen {
     background-color: var(--background);
     color: var(--text);
@@ -97,13 +82,6 @@ html {
     font-family: 'JetBrains Mono', sans-serif;
     text-align: right;
     font-size: 36px;
-}
-
-@media (prefers-color-scheme: dark) {
-    .calcScreen {
-        background-color: var(--textLL);
-        color: var(--background);
-    }
 }
 
 ::placeholder {
@@ -124,7 +102,7 @@ html {
 }
 
 .calcButton {
-    background-color: var(--base3);
+    background-color: var(--background);
     color: var(--text);
     width: 66px;
     height: 66px;
@@ -134,14 +112,49 @@ html {
     font-size: 24px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .calcButton {
-        background-color: var(--textLL);
-        color: var(--background);
-    }
+.calcButton:hover {
+    background-color: var(--backgroundHL);
+    border: var(--background) 1px solid;
 }
+.calcButton:active {
+    background-color: var(--background);
+    border: var(--textLL) 1px solid;
+}
+
 
 /* default font changes on browsers, this fixes */
 .buttonBS {
     font-family: sans-serif;
 }
+
+/* DISABLED DARK MODE SETTINGS */
+/* USING DEFAULT INSTEAD */
+/* @media (prefers-color-scheme: dark) {
+    .calcScreenContainer {
+        background-color: var(--textLL);
+        color: var(--background)
+    }
+} */
+
+/* @media (prefers-color-scheme: dark) {
+    .calcScreen {
+        background-color: var(--textLL);
+        color: var(--background);
+    }
+} */
+
+/* @media (prefers-color-scheme: dark) {
+    .calcButton {
+        background-color: var(--textLL);
+        color: var(--background);
+    }
+
+    .calcButton:hover {
+        background-color: var(--text);
+        border: none;
+    }
+
+    .calcButton:active {
+        background-color: var(--textHL);
+    }
+} */
