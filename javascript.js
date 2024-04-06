@@ -1,168 +1,169 @@
 // initial vars
 const cScreen = document.querySelector(".calcScreen");
 const cNums = document.querySelectorAll(".buttonNum");
-const cOperators = document.querySelectorAll(".buttonOperator")
-const cDecimal = document.querySelector(".buttonDecimal")
-const cAllClear = document.querySelector(".buttonAC")
+const cOperators = document.querySelectorAll(".buttonOperator");
+const cDecimal = document.querySelector(".buttonDecimal");
+const cAllClear = document.querySelector(".buttonAC");
 const cClear = document.querySelector(".buttonCE");
 const cEqual = document.querySelector(".buttonEquals");
 const cBackspace = document.querySelector(".buttonBS");
 
 // constructor
 class Equation {
-    constructor(firstTerm, operator, secondTerm) {
+    constructor(firstTerm, operator, secondTerm, oldTerm) {
         this.firstTerm = firstTerm;
         this.operator = operator;
         this.secondTerm = secondTerm;
-    }
-}
+        this.oldTerm = oldTerm;
+    };
+};
 
-
-// operator functions
+// MATHEMATICAL FUNCTIONS
 function add(firstNum, secondNum) {
     return +firstNum + +secondNum;
-}
+};
 
 function subtract(firstNum, secondNum) {
-    return -firstNum - -secondNum;
-}
+    return +firstNum - +secondNum;
+};
 
 function multiply(firstNum, secondNum) {
     return firstNum * secondNum;
-}
+};
 
 function divide(firstNum, secondNum) {
     return firstNum / secondNum;
-}
+};
 
-
-// main operator
+// operator
 function operate(equation) {
-    // splitting string into vars
-    // let [fNum, operator, sNum] = equationStr.split(" ");
+    if (!equation.secondTerm && equation.oldTerm) {
+        equation.secondTerm = equation.oldTerm;
+    }
 
-    // TODO
-    // switch for operators
-    switch (operator) {
+    switch (equation.operator) {
         case "+":
             console.log("works +");
-            console.log(add(fNum, sNum));
-            break;
+            return add(equation.firstTerm, equation.secondTerm);
         case "-":
             console.log("works -");
-            console.log(subtract(fNum, sNum));
-            break;
+            return subtract(equation.firstTerm, equation.secondTerm);
         case "x":
             console.log("works x");
-            console.log(multiply(fNum, sNum));
-            break;
-        case "/":
+            return multiply(equation.firstTerm, equation.secondTerm);
+        case "÷":
             console.log("works /");
-            console.log(divide(fNum, sNum));
-            break;
-    }
+            return divide(equation.firstTerm, equation.secondTerm);
+    };
+};
 
-    // think need to run 
-    // inputToTerm(add(equation.f, equation.s), new Equation)
-    // but might have to create new equation ahead of time?
-    // make sure not to overwrite existing
-}
+// 
+function equals() {
+    if (cEquation.operator == "÷" && cEquation.secondTerm == "0") {
+        cScreen.value = "oi!";
+        setTimeout(() => cEquation = allClear(), 2000);
+    } else if (cEquation.operator) {
+        cEquation = new Equation(+operate(cEquation).toFixed(8), cEquation.operator, "", cEquation.secondTerm);
+        cScreen.value = cEquation.firstTerm;
+    };
+};
 
+// INPUT FUNCTIONS
+// checks which term and adds number/decimal using callback
+function addChar(callbackFn, inputValue) {
+    if (!cEquation.operator) {
+        return cScreen.value = cEquation.firstTerm = callbackFn(cEquation.firstTerm, inputValue);
+    } else {
+        return cScreen.value = cEquation.secondTerm = callbackFn(cEquation.secondTerm, inputValue);
+    };
+};
 
-// inputting values to equation
-// inputs operator
-function inputOperator(operator) {
+function addDecimal(aTerm, decimal) {
+    // using + to make get correct type conversion
+    if (Number.isInteger(+aTerm)) {
+        return aTerm + decimal;
+    } else {
+        return aTerm;
+    };
+};
+
+function addNumeric(aTerm, number) {
+    return aTerm + number;
+};
+
+function addOperator(newOperator) {
     if (!cEquation.firstTerm) {
         cEquation.firstTerm = "0";
-    }
-    cEquation.operator = operator;
-}
-
-// inputs numbers to terms and displays on screen
-function inputNumerical(number) {
-    if (operatorNotPresent()) {
-        cEquation.firstTerm = inputToTerm(number, cEquation.firstTerm);
-    } else {
-        cEquation.secondTerm = inputToTerm(number, cEquation.secondTerm);
-    }
-}
-
-// inputs decimals - uses inputToTerm
-function inputDecimal() {
-    if (operatorNotPresent()) {
-        if (decimalNotPresent(cEquation.firstTerm)) {
-            cEquation.firstTerm = inputToTerm(".", cEquation.firstTerm);
-        }
-    } else {
-        if (decimalNotPresent(cEquation.secondTerm)) {
-            cEquation.secondTerm = inputToTerm(".", cEquation.secondTerm);
-        }
-    }
-}
-
-// inputs values to term
-function inputToTerm(newNumber, currentTerm) {
-    return currentTerm = cScreen.value = [currentTerm, newNumber].join("")
-}
-
-// returns true if there is no operator set
-function operatorNotPresent() {
-    return !cEquation.operator;
-}
-
-// returns true if no decimals already present in number term
-function decimalNotPresent(currentTerm) {
-    return !currentTerm.includes(".")
-
-}
+    } else if (cEquation.secondTerm) {
+        equals(cEquation);
+    };
+    cEquation.operator = newOperator;
+};
 
 // CLEARING FUNCTIONS
-// clearing all, effective reset
 function allClear() {
-    cScreen.value = null;
-    return new Equation
-}
+    removeColoring(cOperators);
+    cScreen.value = "";
+    return new Equation("", "", "");
+};
 
-// clearing current term
 function clearEntry() {
-    if (operatorNotPresent()){
-        cScreen.value = cEquation.firstTerm = null;
+    if (!cEquation.operator) {
+        return cEquation.firstTerm = "";
     } else {
-        cScreen.value = cEquation.secondTerm = null;
-    }
-}
+        return cEquation.secondTerm = "";
+    };
+};
 
-// backspace last number entered
 function backSpace() {
-    if (operatorNotPresent()) {
-        cScreen.value = cEquation.firstTerm = cEquation.firstTerm.slice(0, -1);
+    if (!cEquation.operator) {
+        return cScreen.value = cEquation.firstTerm = cEquation.firstTerm.slice(0, -1);
     } else {
-        cScreen.value = cEquation.secondTerm = cEquation.secondTerm.slice(0, -1);
-    }
-}
+        return cScreen.value = cEquation.secondTerm = cEquation.secondTerm.slice(0, -1);
+    };
+};
+
+// STYLE FUNCTIONS
+function removeColoring(toReset) {
+    toReset.forEach((rOp) => {
+        rOp.style.backgroundColor = "";
+        rOp.style.border = "";
+    });
+};
+
+function exclusiveColoring(toColor) {
+    removeColoring(cOperators);
+    toColor.style.backgroundColor = "var(--backgroundHL)";
+    toColor.style.border = "var(--textLL) 1px solid";
+};
 
 
 // MAIN
-let cEquation = allClear()
+let cEquation = allClear();
 
 
 // EVENT LISTENERS
 cNums.forEach((cNum) => {
-    cNum.addEventListener("click", () => inputNumerical(cNum.textContent));
+    cNum.addEventListener("click", () => {
+        addChar(addNumeric, cNum.textContent);
+    });
 });
 
-cDecimal.addEventListener("click", () => inputDecimal())
+cDecimal.addEventListener("click", () => {
+    addChar(addDecimal, cDecimal.textContent);
+});
 
 cOperators.forEach((cOp) => {
-    cOp.addEventListener("click", () => inputOperator(cOp.textContent))
-})
+    cOp.addEventListener("click", () => {
+        addOperator(cOp.textContent);
+        exclusiveColoring(cOp);
+    });
+});
 
 cAllClear.addEventListener("click", () => cEquation = allClear());
 
 cClear.addEventListener("click", () => clearEntry());
 
-cBackspace.addEventListener("click", () => backSpace())
+cBackspace.addEventListener("click", () => backSpace());
 
-// cEqual.addEventListener("click", () => {
-//     operate(cEquation)
-// });
+cEqual.addEventListener("click", () => equals(cEquation));
