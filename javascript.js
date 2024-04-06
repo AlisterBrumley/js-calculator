@@ -43,16 +43,12 @@ function operate(equation) {
 
     switch (equation.operator) {
         case "+":
-            console.log("works +");
             return add(equation.firstTerm, equation.secondTerm);
         case "-":
-            console.log("works -");
             return subtract(equation.firstTerm, equation.secondTerm);
         case "x":
-            console.log("works x");
             return multiply(equation.firstTerm, equation.secondTerm);
         case "÷":
-            console.log("works /");
             return divide(equation.firstTerm, equation.secondTerm);
     };
 };
